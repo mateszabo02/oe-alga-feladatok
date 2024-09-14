@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ALGA/.vs/ALGA
+/ALGA/ALGA/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
