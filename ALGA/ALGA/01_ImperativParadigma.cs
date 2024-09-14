@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace OE.ALGA.Paradigmak
 {
-    public interface IVegrehajto
+    public interface IVegrehajthato
     {
         void Vegrehajtas();
     }
-    public class FeladatTarolo<T> where T : IVegrehajto
+    public class FeladatTarolo<T> : IEnumerable<T> where T : IVegrehajthato
     {
 
-        T[] tarolo;
+        protected T[] tarolo;
         int n = 0;
         public FeladatTarolo(int meret)
         {
@@ -30,8 +31,11 @@ namespace OE.ALGA.Paradigmak
             }
             else throw new TaroloMegteltKivetel();
         }
+        class TaroloMegteltKivetel() : Exception
+        {
 
-        void MindentVegrehajt()
+        }
+        public virtual void MindentVegrehajt()
         {
             for(int i = 0; i < tarolo.Length; i++)
             {
@@ -39,20 +43,76 @@ namespace OE.ALGA.Paradigmak
             }
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            FeladatTaroloBejaro<T> bejaro = new FeladatTaroloBejaro<T> (tarolo, n);
+            return bejaro;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
     public interface IFuggo
     {
-        protected bool FuggosegTeljesul();
+        public bool FuggosegTeljesul { get; }
     }
-    class FuggoFeladatTarolo : FeladatTarolo<T> where T : IFuggo, IVegrehajto
+    public class FuggoFeladatTarolo<T> : FeladatTarolo<T> where T : IVegrehajthato, IFuggo
     {
         public FuggoFeladatTarolo(int meret) : base(meret)
         {
         }
+        public override void MindentVegrehajt()
+        {
+            for(int i = 0; i<tarolo.Length; i++)
+            {
+                if (tarolo[i].FuggosegTeljesul)
+                {
+                    tarolo[i].Vegrehajtas();
+                }
+            }
+        }
     }
 
-    class TaroloMegteltKivetel() : Exception
+    class FeladatTaroloBejaro<T> : IEnumerator<T>
     {
+        T[] tarolo;
+        int n;
+        int aktualisIndex = -1;
 
+        public FeladatTaroloBejaro(T[] tarolo, int n)
+        {
+            this.n = n;
+            this.tarolo = tarolo;
+        }
+
+        public T Current
+        {
+            get { return tarolo[aktualisIndex]; }
+        }
+
+        object IEnumerator.Current => throw new NotImplementedException();
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MoveNext()
+        {
+            if (aktualisIndex < n)
+            {
+                aktualisIndex++;
+                return true;
+            }
+            return false;
+
+        }
+
+        public void Reset()
+        {
+            aktualisIndex=-1;
+        }
     }
 }
