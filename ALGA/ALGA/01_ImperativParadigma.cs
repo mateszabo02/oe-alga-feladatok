@@ -16,7 +16,7 @@ namespace OE.ALGA.Paradigmak
     {
 
         protected T[] tarolo;
-        int n = 0;
+        protected int  n = 0;
         public FeladatTarolo(int meret)
         {
             tarolo = new T[meret];

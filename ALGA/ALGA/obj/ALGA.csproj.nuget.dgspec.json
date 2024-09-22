@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\OE\\algoritmusok_es_adatszerkezetek\\work\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj": {}
+    "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj": {}
   },
   "projects": {
-    "E:\\OE\\algoritmusok_es_adatszerkezetek\\work\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj": {
+    "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\OE\\algoritmusok_es_adatszerkezetek\\work\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj",
+        "projectUniqueName": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj",
         "projectName": "ALGA",
-        "projectPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\work\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj",
+        "projectPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj",
         "packagesPath": "C:\\Users\\Máté\\.nuget\\packages\\",
-        "outputPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\work\\oe-alga-feladatok\\ALGA\\ALGA\\obj\\",
+        "outputPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
