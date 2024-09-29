@@ -60,6 +60,8 @@ namespace OE.ALGA.Adatszerkezetek
     public class TombSor<T> : Sor<T>
     {
         T[] E;
+        int e;
+        int u;
         int n = 0;
         public TombSor(int meret)
         {
@@ -74,7 +76,7 @@ namespace OE.ALGA.Adatszerkezetek
         {
             if (!Ures)
             {
-                return E[n - 1];
+                return E[0];
             }
             else { throw new NincsElemKivetel(); }
         }
@@ -96,6 +98,10 @@ namespace OE.ALGA.Adatszerkezetek
         {
             if (!Ures)
             {
+                for(int i=1; i<n; i++)
+                {
+                    E[i-1] = E[i];
+                }
                 return E[--n];
             }
             else throw new NincsElemKivetel();
