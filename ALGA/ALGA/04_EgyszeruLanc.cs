@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -118,9 +119,10 @@ namespace OE.ALGA.Adatszerkezetek
     class LancoltLista<T> : Lista<T>
     {
         LancElem<T>? fej;
+        int elemszam = 0;
         public int Elemszam
         {
-            get;
+            get {   return elemszam; }
         }
         public LancoltLista()
         {
@@ -129,7 +131,12 @@ namespace OE.ALGA.Adatszerkezetek
 
         public void Bejar(Action<T> muvelet)
         {
-            throw new NotImplementedException();
+            LancElem<T> temp = fej;
+            while(temp != null )
+            {
+                muvelet(temp.tart);
+                temp = temp.kov;
+            }
         }
 
         public void Beszur(int index, T ertek)
@@ -138,6 +145,7 @@ namespace OE.ALGA.Adatszerkezetek
             {
                 LancElem<T> uj = new LancElem<T>(ertek, fej);
                 fej = uj;
+                elemszam++;
             }
             else
             {
@@ -173,21 +181,111 @@ namespace OE.ALGA.Adatszerkezetek
                 }
                 temp.kov = uj;
             }
+            elemszam++;
         }
 
         public T Kiolvas(int index)
         {
-            throw new NotImplementedException();
+            LancElem<T> temp = fej;
+            int i = 0;
+            while(temp != null && i < index)
+            {
+                temp = temp.kov;
+                i++;
+            }
+            if (temp == null)
+            {
+                return temp.tart;
+            }
+            else
+            {
+                throw new HibasIndexKivetel();
+            }
         }
 
         public void Modosit(int index, T ertek)
         {
-            throw new NotImplementedException();
+            LancElem<T> temp = fej;
+            int i = 0;
+            while(temp != null && i < index)
+            {
+                temp = temp.kov;
+                i++;
+            }
+            if(temp != null)
+            {
+                temp.tart = ertek;
+            }
+            else
+            {
+                throw new HibasIndexKivetel();
+            }
         }
 
         public void Torol(T ertek)
         {
+            LancElem<T> temp = fej;
+            LancElem<T> e = null;
+            do
+            {
+                while (temp != null && !temp.tart.Equals(ertek))
+                {
+                    e = temp;
+                    temp = temp.kov;
+                }
+                if (temp != null)
+                {
+                    LancElem<T> q = temp.kov;
+                    if (e == null)
+                    {
+                        fej = q;
+                    }
+                    else
+                    {
+                        e.kov = q;
+                    }
+                    temp = q;
+                    elemszam--;
+                }
+            } while (temp != null);
+        }
+    }
+    class LancoltListaBejaro<T> : IEnumerator<T>
+    {
+        LancElem<T>? fej;
+        LancElem<T>? aktualisElem;
+        public T Current
+        {
+            get { return aktualisElem.tart; }
+        }
+        public LancoltListaBejaro(LancElem<T>? fej)
+        {
+            this.fej = fej;
+        }
+
+        object IEnumerator.Current => this.Current;
+
+        public void Dispose()
+        {
             throw new NotImplementedException();
+        }
+
+        public bool MoveNext()
+        {
+            if(aktualisElem == null)
+            {
+                aktualisElem = fej;
+            }
+            else
+            {
+                aktualisElem = aktualisElem.kov;
+            }
+            return aktualisElem != null;
+        }
+
+        public void Reset()
+        {
+            aktualisElem = null;
         }
     }
 }

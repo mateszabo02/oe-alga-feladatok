@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RgBAPLcR9NE=",
+  "dgSpecHash": "CDSOTgsqvUQ=",
   "success": true,
-  "projectFilePath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\Test_03\\Test.csproj",
+  "projectFilePath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\Test_03\\Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Máté\\.nuget\\packages\\microsoft.codecoverage\\17.11.1\\microsoft.codecoverage.17.11.1.nupkg.sha512",
     "C:\\Users\\Máté\\.nuget\\packages\\microsoft.net.test.sdk\\17.11.1\\microsoft.net.test.sdk.17.11.1.nupkg.sha512",
