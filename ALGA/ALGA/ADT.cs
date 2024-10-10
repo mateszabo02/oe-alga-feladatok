@@ -19,7 +19,7 @@ namespace OE.ALGA.Adatszerkezetek
     public interface Halmaz<T>
     {
         public void Beszur(T ertek);
-        public void Eleme(T ertek);
+        public bool Eleme(T ertek);
         public void Torol(T ertek);
         public void Bejar(Action<T> muvelet);
     }
