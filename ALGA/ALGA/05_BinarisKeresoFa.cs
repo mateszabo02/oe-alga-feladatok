@@ -18,12 +18,12 @@ namespace OE.ALGA.Adatszerkezetek
             this.jobb = jobb;
         }
     }
-    class FaHalmaz<T> : Halmaz<T> where T : IComparable
+    public class FaHalmaz<T> : Halmaz<T> where T : IComparable
     {
         FaElem<T> gyoker;
         public void Bejar(Action<T> muvelet)
         {
-            throw new NotImplementedException();
+            ReszfaBejarasPreOrder(gyoker, muvelet);
         }
         FaElem<T> ReszfabaBeszur(FaElem<T>? p, T ertek)
         {
@@ -86,28 +86,19 @@ namespace OE.ALGA.Adatszerkezetek
                 {
                     p.bal = ReszfabolTorol(p.bal, ertek);
                 }
-                else
+                else if (p.tart.CompareTo(ertek) < 0)
                 {
-                    if (p.tart.CompareTo(ertek) < 0)
-                    {
-                        p.jobb = ReszfabolTorol(p.jobb, ertek);
-                    }
-                    else
-                    {
-                        if(p.bal == null)
-                        {
-                            p = p.jobb;
-                        }
-                        else 
-                        {
-                            if (p.jobb == null)
-                            {
-                                p = p.bal;
-                            }
-                            else { p.bal = KetGyerekes(p, p.bal);}
-                        }
-                    }
+                    p.jobb = ReszfabolTorol(p.jobb, ertek);
                 }
+                else if(p.bal == null)
+                {
+                    p = p.jobb;
+                }
+                else if (p.jobb == null)
+                {
+                    p = p.bal;
+                }
+                else { p.bal = KetGyerekesTorles(p, p.bal);}
                 return p;
             }
             else
@@ -115,13 +106,50 @@ namespace OE.ALGA.Adatszerkezetek
                 throw new NincsElemKivetel();
             }
         }
-        FaElem<T>? KetGyerekesTorles(FaElem<T>? )
+        FaElem<T>? KetGyerekesTorles(FaElem<T>? e, FaElem<T> r)
         {
-            if(ertek)
+            if(r.jobb != null)
+            {
+                r.jobb = KetGyerekesTorles(e, r.jobb);
+                return r;
+            }
+            else
+            {
+                e.tart = r.tart;
+                r = r.bal;
+                return r;
+            }
         }
         public void Torol(T ertek)
         {
             gyoker = ReszfabolTorol(gyoker, ertek);
+        }
+        void ReszfaBejarasPreOrder(FaElem<T>? p, Action<T> muvelet)
+        {
+            if(p != null)
+            {
+                muvelet(p.tart);
+                ReszfaBejarasPreOrder(p.bal, muvelet);
+                ReszfaBejarasPreOrder(p.jobb, muvelet);
+            }
+        }
+        void ReszfaBejarasInOrder(FaElem<T> p, Action<T> muvelet)
+        {
+            if (p != null)
+            {
+                ReszfaBejarasInOrder(p.bal, muvelet);
+                muvelet(p.tart);
+                ReszfaBejarasInOrder(p.jobb, muvelet);
+            }
+        }
+        void ReszfaBejarasPostOrder(FaElem<T> p, Action<T> muvelet)
+        {
+            if( p != null)
+            {
+                ReszfaBejarasPostOrder(p.bal, muvelet);
+                ReszfaBejarasPostOrder(p.jobb, muvelet);
+                muvelet(p.tart);
+            }
         }
     }
 }
