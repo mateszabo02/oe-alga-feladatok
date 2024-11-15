@@ -923,11 +923,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\Tesztek\\Tesztek.csproj",
+      "projectUniqueName": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\ALGA\\Tesztek\\Tesztek.csproj",
       "projectName": "Tesztek",
-      "projectPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\Tesztek\\Tesztek.csproj",
+      "projectPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\ALGA\\Tesztek\\Tesztek.csproj",
       "packagesPath": "C:\\Users\\Máté\\.nuget\\packages\\",
-      "outputPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\Tesztek\\obj\\",
+      "outputPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\ALGA\\Tesztek\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -949,8 +949,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj": {
-              "projectPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\oe-alga-feladatok\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj"
+            "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj": {
+              "projectPath": "E:\\OE\\algoritmusok_es_adatszerkezetek\\oe-alga-feladatok\\ALGA\\ALGA\\ALGA.csproj"
             }
           }
         }
