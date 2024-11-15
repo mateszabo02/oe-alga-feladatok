@@ -49,6 +49,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[3.6.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -119,9 +125,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[3.6.3, )"
+            },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[3.6.1, )"
+              "version": "[3.6.3, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",

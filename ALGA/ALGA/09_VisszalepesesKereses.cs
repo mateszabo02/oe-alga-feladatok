@@ -28,7 +28,7 @@ namespace OE.ALGA.Optimalizalas
         public void Backtrack(int szint, ref T[] E, ref bool van, ref T[] O)
         {
             int i = 0;
-            while (i < M[i])
+            while (i < M[szint])
             {
                 
                 if(ft(szint, R[szint, i]))

@@ -38,7 +38,7 @@ namespace OE.ALGA.Adatszerkezetek
         public CsucsmatrixSulyozatlanEgeszGraf(int n)
         {
             this.n = n;
-            M = new bool[n, n];
+            this.M = new bool[n, n];
         }
         public int CsucsokSzama { get { return n; } }
 
@@ -57,6 +57,13 @@ namespace OE.ALGA.Adatszerkezetek
                         }
                     }
                 }
+                /*for (int i = 0; i < M.GetLength(0); i++)
+                {
+                    for (int j = 0; j < M.GetLength(1); j++)
+                    {
+                        cnt += Convert.ToInt32(M[i, j]);
+                    }
+                }*/
                 return cnt;
             }
         }
@@ -79,12 +86,12 @@ namespace OE.ALGA.Adatszerkezetek
         {
             get
             {
-                FaHalmaz<EgeszGrafEl> el = new FaHalmaz<EgeszGrafEl> ();
-                for(int i=0; i < n; i++)
+                FaHalmaz<EgeszGrafEl> el = new FaHalmaz<EgeszGrafEl>();
+                for (int i = 0; i < n; i++)
                 {
-                    for(int j=0; j < n; j++)
+                    for (int j = 0; j < n; j++)
                     {
-                        if(M[i, j] == true)
+                        if (M[i, j] == true)
                         {
                             el.Beszur(new EgeszGrafEl(i, j));
                         }
@@ -97,7 +104,7 @@ namespace OE.ALGA.Adatszerkezetek
         public Halmaz<int> Szomszedai(int csucs)
         {
             FaHalmaz<int> csucsok = new FaHalmaz<int>();
-            for(int i = 0;i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 if (M[csucs, i])
                 {

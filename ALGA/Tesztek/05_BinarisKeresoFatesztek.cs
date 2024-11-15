@@ -1,26 +1,25 @@
-﻿
-using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OE.ALGA.Adatszerkezetek;
 
 namespace OE.ALGA.Tesztek
 {
-    [TestFixture]
+    [TestClass()]
     public class FaHalmazTesztek
     {
-        [Test]
+        [TestMethod()]
         public void Beszuras() //F4.
         {
             Halmaz<int> v = new FaHalmaz<int>();
             v.Beszur(1);
             v.Beszur(3);
             v.Beszur(2);
-            Assert.That(v.Eleme(1), Is.True);
-            Assert.That(v.Eleme(2), Is.True);
-            Assert.That(v.Eleme(3), Is.True);
-            Assert.That(v.Eleme(4), Is.False);
+            Assert.IsTrue(v.Eleme(1));
+            Assert.IsTrue(v.Eleme(2));
+            Assert.IsTrue(v.Eleme(3));
+            Assert.IsFalse(v.Eleme(4));
         }
 
-        [Test]
+        [TestMethod()]
         public void Torles() //F5.
         {
             Halmaz<int> v = new FaHalmaz<int>();
@@ -28,14 +27,13 @@ namespace OE.ALGA.Tesztek
             v.Beszur(3);
             v.Beszur(2);
             v.Torol(2);
-            
-            Assert.That(v.Eleme(1), Is.True);
-            Assert.That(v.Eleme(2), Is.False);
-            Assert.That(v.Eleme(3), Is.True);
-            Assert.That(v.Eleme(4), Is.False);
+            Assert.IsTrue(v.Eleme(1));
+            Assert.IsFalse(v.Eleme(2));
+            Assert.IsTrue(v.Eleme(3));
+            Assert.IsFalse(v.Eleme(4));
         }
 
-        [Test]
+        [TestMethod()]
         public void DuplaBeszuras() //F5.
         {
             Halmaz<int> v = new FaHalmaz<int>();
@@ -44,13 +42,13 @@ namespace OE.ALGA.Tesztek
             v.Beszur(3);
             v.Beszur(2);
             v.Torol(2);
-            Assert.That(v.Eleme(1), Is.True);
-            Assert.That(v.Eleme(2), Is.False);
-            Assert.That(v.Eleme(3), Is.True);
-            Assert.That(v.Eleme(4), Is.False);
+            Assert.IsTrue(v.Eleme(1));
+            Assert.IsFalse(v.Eleme(2));
+            Assert.IsTrue(v.Eleme(3));
+            Assert.IsFalse(v.Eleme(4));
         }
 
-        [Test]
+        [TestMethod()]
         public void PreorderBejaras() //F6.
         {
             Halmaz<int> v = new FaHalmaz<int>();
@@ -63,7 +61,7 @@ namespace OE.ALGA.Tesztek
             v.Beszur(7);
             string osszefuzo = "";
             v.Bejar(x => osszefuzo += x);
-            Assert.That("5314879", Is.EqualTo(osszefuzo));
+            Assert.AreEqual("5314879", osszefuzo);
         }
 
     }

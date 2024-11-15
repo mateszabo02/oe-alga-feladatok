@@ -12,6 +12,10 @@ namespace OE.ALGA.Paradigmak
     {
         void Vegrehajtas();
     }
+    public class TaroloMegteltKivetel() : Exception
+    {
+
+    }
     public class FeladatTarolo<T> : IEnumerable<T> where T : IVegrehajthato
     {
 
@@ -22,7 +26,7 @@ namespace OE.ALGA.Paradigmak
             tarolo = new T[meret];
         }
 
-        void Felvesz(T elem)
+        public void Felvesz(T elem)
         {
             if (tarolo.Length > n)
             {
@@ -31,10 +35,7 @@ namespace OE.ALGA.Paradigmak
             }
             else throw new TaroloMegteltKivetel();
         }
-        class TaroloMegteltKivetel() : Exception
-        {
 
-        }
         public virtual void MindentVegrehajt()
         {
             for(int i = 0; i < tarolo.Length; i++)

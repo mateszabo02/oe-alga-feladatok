@@ -107,7 +107,7 @@ namespace OE.ALGA.Adatszerkezetek
             else throw new NincsElemKivetel();
         }
     }
-    public class TombLista<T> : IEnumerable<T> where T : Lista<T>
+    public class TombLista<T> : Lista<T>, IEnumerable<T>
     {
         T[] E;
         int n = 0;
@@ -118,14 +118,7 @@ namespace OE.ALGA.Adatszerkezetek
         public TombLista(int meret)
         {
             E = new T[meret];
-        }
-        public TombLista(int meret, T[] tomb)
-        {
-            E = new T[meret];
-            for (int i = 0; i < tomb.Length; i++)
-            {
-                E[i] = tomb[i];
-            }
+            n = 0;
         }
         public T Kiolvas(int index)
         {
@@ -228,7 +221,7 @@ namespace OE.ALGA.Adatszerkezetek
             throw new NotImplementedException();
         }
     }
-    class TombListaBejaro<T> : IEnumerator<T>
+    public class TombListaBejaro<T> : IEnumerator<T>
     {
         T[] E;
         int n;

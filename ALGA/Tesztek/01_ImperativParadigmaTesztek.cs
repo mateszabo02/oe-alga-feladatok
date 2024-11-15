@@ -1,6 +1,5 @@
 ﻿
-/*using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OE.ALGA.Paradigmak;
 
 namespace OE.ALGA.Tesztek
@@ -257,4 +256,3 @@ namespace OE.ALGA.Tesztek
 
     }
 }
-*/

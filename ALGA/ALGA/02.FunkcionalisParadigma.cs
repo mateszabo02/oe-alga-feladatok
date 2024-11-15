@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OE.ALGA.Paradigmak
 {
-    class FeltetelesFeladatTarolo<T> : FeladatTarolo<T>, IEnumerable<T> where T : IVegrehajthato
+    public class FeltetelesFeladatTarolo<T> : FeladatTarolo<T>, IEnumerable<T> where T : IVegrehajthato
     {
         public FeltetelesFeladatTarolo(int meret) : base(meret)
         {
@@ -48,7 +48,7 @@ namespace OE.ALGA.Paradigmak
         }
 
     }
-    class FeltetelesFeladatTaroloBejaro<T> : IEnumerator<T>
+    public class FeltetelesFeladatTaroloBejaro<T> : IEnumerator<T>
     {
         T[] tarolo;
         int n;

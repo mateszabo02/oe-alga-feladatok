@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OE.ALGA.Adatszerkezetek
 {
-    class LancElem<T>
+    public class LancElem<T>
     {
         public T tart;
         public LancElem<T>? kov;
@@ -18,7 +18,7 @@ namespace OE.ALGA.Adatszerkezetek
             this.kov = kov;
         }
     }
-    class LancoltVerem<T> : Verem<T>
+    public class LancoltVerem<T> : Verem<T>
     {
         LancElem<T>? fej;
         public LancoltVerem()
@@ -62,7 +62,7 @@ namespace OE.ALGA.Adatszerkezetek
             }
         }
     }
-    class LancoltSor<T> : Sor<T>
+    public class LancoltSor<T> : Sor<T>
     {
         LancElem<T>? fej;
         LancElem<T>? vege;
@@ -116,7 +116,7 @@ namespace OE.ALGA.Adatszerkezetek
             }
         }
     }
-    class LancoltLista<T> : Lista<T>
+    public class LancoltLista<T> : Lista<T>
     {
         LancElem<T>? fej;
         int elemszam = 0;
@@ -250,7 +250,7 @@ namespace OE.ALGA.Adatszerkezetek
             } while (temp != null);
         }
     }
-    class LancoltListaBejaro<T> : IEnumerator<T>
+    public class LancoltListaBejaro<T> : IEnumerator<T>
     {
         LancElem<T>? fej;
         LancElem<T>? aktualisElem;
