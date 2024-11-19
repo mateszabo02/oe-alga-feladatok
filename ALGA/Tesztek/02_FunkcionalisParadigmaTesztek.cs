@@ -83,8 +83,8 @@ namespace OE.ALGA.Tesztek
             Assert.IsFalse(a1.Vegrehajtott);
             Assert.IsFalse(b1.Vegrehajtott);
             Assert.IsFalse(a2.Vegrehajtott);
-            //Predicate<TesztFeladat> aKezdoBetu = (TesztFeladat x) => x.Azonosito[0] == 'a';
-            //tarolo.FeltetelesVegrehajtas(aKezdoBetu); // csak 'a' kezdetűek végrehajtása
+            Predicate<TesztFeladat> aKezdoBetu = (TesztFeladat x) => x.Azonosito[0] == 'a';
+            tarolo.FeltetelesVegrehajtas(aKezdoBetu); // csak 'a' kezdetűek végrehajtása
             Assert.IsTrue(a1.Vegrehajtott);
             Assert.IsFalse(b1.Vegrehajtott);
             Assert.IsTrue(a2.Vegrehajtott);

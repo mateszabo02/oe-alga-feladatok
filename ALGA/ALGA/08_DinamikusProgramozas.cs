@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,28 +15,30 @@ namespace OE.ALGA.Optimalizalas
             this.problema = problema;
         }
         public int LepesSzam { get; private set; }
-        float[,] TablazatFeltoltes()
+        int[,] TablazatFeltoltes()
         {
-            float[,] F = new float[problema.n, problema.Wmax];
-            for (int t = 0; t < problema.n; t++)
+            int[,] F = new int[problema.n+1, problema.Wmax+1];
+            for (int t = 0; t <= problema.n; t++)
             {
                 F[t, 0] = 0;
             }
-            for (int h = 0; h < problema.Wmax; h++)
+            for (int h = 0; h <= problema.Wmax; h++)
             {
                 F[0,h] = 0;
             }
-            for(int t=0; t < problema.n; t++)
+            for(int t=1; t <= problema.n; t++)
             {
-                for(int h = 0;h < problema.Wmax; h++)
+                for(int h = 1;h <= problema.Wmax; h++)
                 {
-                    if(h>= problema.w[t])
+                    int nem = F[t - 1, h];
+                    if(h>= problema.w[t-1])
                     {
-                        F[t,h] = Math.Max(F[t-1,h], F[t - 1, h - problema.w[t] + (int)Math.Round(problema.p[t])]);
+                        int igen = F[t - 1, h - problema.w[t - 1]] + (int)Math.Round(problema.p[t - 1]);
+                        F[t,h] = Math.Max(igen, nem);
                     }
                     else
                     {
-                        F[t, h] = F[t-1, h];
+                        F[t, h] = nem;
                     }
                 }
             }
@@ -52,15 +55,16 @@ namespace OE.ALGA.Optimalizalas
             {
                 O[i] = false;
             }
-            float[,] tablazat = TablazatFeltoltes();
+            int[,] tablazat = TablazatFeltoltes();
             int t = problema.n;
             int h= problema.Wmax;
             while(t>0 && h>0)
             {
+                LepesSzam++;
                 if (tablazat[t,h] != tablazat[t - 1, h])
                 {
-                    O[t] = true;
-                    h = h - problema.Wmax;
+                    O[t-1] = true;
+                    h -= problema.w[t - 1];
                 }
                 t--;
             }

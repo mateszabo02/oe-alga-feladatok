@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace OE.ALGA.Paradigmak
 {
-    public class FeltetelesFeladatTarolo<T> : FeladatTarolo<T>, IEnumerable<T> where T : IVegrehajthato
+    public class FeltetelesFeladatTarolo<T> : FeladatTarolo<T> where T : IVegrehajthato
     {
         public FeltetelesFeladatTarolo(int meret) : base(meret)
         {
         }
-        public void FeltetelesVegrehajtas(Func<T, bool> feltetel)
+        public Predicate<T> BejaroFeltetel { get; set; } 
+        public void FeltetelesVegrehajtas(Predicate<T> feltetel)
         {
             for (int i = 0; i < n; i++)
             {
@@ -23,17 +24,13 @@ namespace OE.ALGA.Paradigmak
                 }
             }
         }
-        public Func<T,bool> BejaroFeltetel 
-        {
-            get;
-            set;
-        }
+
         public IEnumerator<T> GetEnumerator()
         {
             if (BejaroFeltetel == null)
             {
-                Func<T, bool> func = t => true;
-                FeltetelesFeladatTaroloBejaro<T> bejaro = new FeltetelesFeladatTaroloBejaro<T>(tarolo, n, func);
+                Predicate<T> feltetel = t => true;
+                FeltetelesFeladatTaroloBejaro<T> bejaro = new FeltetelesFeladatTaroloBejaro<T>(tarolo, n, feltetel);
                 return bejaro;
             }
             else {
@@ -42,10 +39,6 @@ namespace OE.ALGA.Paradigmak
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
 
     }
     public class FeltetelesFeladatTaroloBejaro<T> : IEnumerator<T>
@@ -53,8 +46,8 @@ namespace OE.ALGA.Paradigmak
         T[] tarolo;
         int n;
         int aktualisIndex = -1;
-        Func<T, bool> feltetel;
-        public FeltetelesFeladatTaroloBejaro(T[] tarolo, int n, Func<T, bool> feltetel)
+        Predicate<T> feltetel;
+        public FeltetelesFeladatTaroloBejaro(T[] tarolo, int n, Predicate<T> feltetel)
         {
             this.tarolo = tarolo;
             this.n = n;
@@ -69,24 +62,20 @@ namespace OE.ALGA.Paradigmak
             }
         }
 
-        object IEnumerator.Current => throw new NotImplementedException();
+        object IEnumerator.Current => this.Current;
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
 
         public bool MoveNext()
         {
-            if (aktualisIndex < n)
+            do
             {
-                if (feltetel(tarolo[aktualisIndex]))
-                {
-                    return true;
-                }
                 aktualisIndex++;
-            }
-            return false;
+            }while(aktualisIndex<n && !feltetel(tarolo[aktualisIndex])) ;
+            return aktualisIndex < n;
         }
 
         public void Reset()

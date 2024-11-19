@@ -225,7 +225,7 @@ namespace OE.ALGA.Tesztek
         [TestMethod]
         public void ForeachBejaras() //F5.
         {
-            /*
+            
             LancoltLista<string> l = new LancoltLista<string>();
             l.Hozzafuz("a");
             l.Hozzafuz("c");
@@ -248,7 +248,7 @@ namespace OE.ALGA.Tesztek
             Assert.AreEqual("c", l.Kiolvas(1));
             Assert.AreEqual("d", l.Kiolvas(2));
             Assert.AreEqual("b", l.Kiolvas(3));
-            */
+            
         }
     }
 }

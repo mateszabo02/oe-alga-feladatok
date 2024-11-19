@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OE.ALGA.Adatszerkezetek;
 
@@ -275,4 +275,3 @@ namespace OE.ALGA.Tesztek
     }
 
 }
-*/

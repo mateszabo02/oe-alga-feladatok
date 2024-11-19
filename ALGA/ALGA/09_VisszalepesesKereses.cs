@@ -9,12 +9,12 @@ namespace OE.ALGA.Optimalizalas
 {
     public class VisszalepesesOptimalizacio<T>
     {
-        public int n; //szint
-        public int[] M; //lehetséges részmegoldások száma
-        public T[,] R; //lehetséges részmegoldások
-        public Func<int, T, bool> ft;
-        public Func<int, T, T[], bool> fk;
-        public Func<T[], float> josag;
+        protected int n; //szint
+        protected int[] M; //lehetséges részmegoldások száma
+        protected T[,] R; //lehetséges részmegoldások
+        protected Func<int, T, bool> ft;
+        protected Func<int, T, T[], bool> fk;
+        protected Func<T[], float> josag;
         public VisszalepesesOptimalizacio(int n, int[] m, T[,] r, Func<int, T, bool> ft, Func<int, T, T[], bool> fk, Func<T[], float> josag)
         {
             this.n = n;
@@ -24,29 +24,29 @@ namespace OE.ALGA.Optimalizalas
             this.fk = fk;
             this.josag = josag;
         }
-        public int LepesSzam {  get; protected set; }
+        public int LepesSzam { get; protected set; }
         public void Backtrack(int szint, ref T[] E, ref bool van, ref T[] O)
         {
             int i = 0;
             while (i < M[szint])
             {
-                
-                if(ft(szint, R[szint, i]))
+
+                if (ft(szint, R[szint, i]))
                 {
-                    if(fk(szint, R[szint, i], E))
+                    if (fk(szint, R[szint, i], E))
                     {
                         E[szint] = R[szint, i];
-                        if(szint == n)
+                        if (szint + 1 == n)
                         {
-                            if(!van || josag(E) > josag(E))
+                            if (!van || josag(E) > josag(O))
                             {
-                                O = E;
+                                O = (T[])E.Clone();
                             }
                             van = true;
                         }
                         else
                         {
-                            Backtrack(szint+1, ref E, ref van, ref O);
+                            Backtrack(szint + 1, ref E, ref van, ref O);
                         }
                     }
                 }
@@ -74,12 +74,12 @@ namespace OE.ALGA.Optimalizalas
         public bool[] OptimalisMegoldas()
         {
             int[] M = new int[problema.n];
-            for(int i = 0; i < M.Length; i++)
+            for (int i = 0; i < M.Length; i++)
             {
                 M[i] = 2;
             }
             bool[,] R = new bool[problema.n, 2];
-            for(int i = 0;i < R.Length; i++)
+            for (int i = 0; i < R.GetLength(0); i++)
             {
                 R[i, 0] = true;
             }
@@ -101,26 +101,26 @@ namespace OE.ALGA.Optimalizalas
         {
             this.fb = fb;
         }
-        void Backtrack(int szint, T[]E, bool van, T[] O)
+        void Backtrack(int szint, T[] E, bool van, T[] O)
         {
             int i = 0;
             while (i < M[szint])
             {
-                
-                if(ft(szint, R[szint, i]))
+
+                if (ft(szint, R[szint, i]))
                 {
-                    if(fk(szint, R[szint, i], E))
+                    if (fk(szint, R[szint, i], E))
                     {
                         E[szint] = R[szint, i];
-                        if(szint == n)
+                        if (szint + 1 == n)
                         {
-                            if(!van || josag(E) > josag(O))
+                            if (!van || josag(E) > josag(O))
                             {
-                                O = E;
+                                O = (T[])E.Clone();
                             }
                             van = true;
                         }
-                        else if(josag(E) + fb(szint,E) > josag(O))
+                        else if (josag(E) + fb(szint, E) > josag(O))
                         {
                             Backtrack(szint + 1, E, van, O);
                         }
@@ -139,13 +139,13 @@ namespace OE.ALGA.Optimalizalas
         public bool[] OptimalisMegoldas()
         {
             bool[] E = new bool[problema.n];
-            int[] M= new int[problema.n];
+            int[] M = new int[problema.n];
             for (int i = 0; i < M.Length; i++)
             {
                 M[i] = 2;
             }
             bool[,] R = new bool[problema.n, 2];
-            for (int i = 0; i < R.Length; i++)
+            for (int i = 0; i < R.GetLength(0); i++)
             {
                 R[i, 0] = true;
             }
@@ -153,6 +153,19 @@ namespace OE.ALGA.Optimalizalas
                 (int szint, bool r, bool[] E) => { E[szint] = r; return problema.OsszSuly(E) <= problema.Wmax; },
                 (E) => (int)Math.Round(problema.OsszErtek(E)));
             return visszalepeses.OptimalisMegoldas();
+        }
+        float fb(int szint, bool[] E)
+        {
+            float sum = 0;
+            int ossz = problema.OsszSuly(E);
+            for (int i = szint + 1; i < problema.n; i++)
+            {
+                if (ossz + problema.w[i] <= problema.Wmax)
+                {
+                    sum += problema.p[i];
+                }
+            }
+            return sum;
         }
     }
 }

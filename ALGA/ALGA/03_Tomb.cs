@@ -10,7 +10,7 @@ namespace OE.ALGA.Adatszerkezetek
 {
     public class TombVerem<T> : Verem<T>
     {
-        int n = 0;
+        int n;
         T[] E;
         public TombVerem(int meret) 
         {
@@ -34,7 +34,7 @@ namespace OE.ALGA.Adatszerkezetek
 
         public void Verembe(T ertek)
         {
-            if(n > E.Length)
+            if(n >= E.Length)
             {
                 throw new NincsHelyKivetel();
             }
@@ -62,7 +62,7 @@ namespace OE.ALGA.Adatszerkezetek
         T[] E;
         int e;
         int u;
-        int n = 0;
+        int n;
         public TombSor(int meret)
         {
             E = new T[meret];
@@ -76,20 +76,21 @@ namespace OE.ALGA.Adatszerkezetek
         {
             if (!Ures)
             {
-                return E[0];
+                return E[e];
             }
             else { throw new NincsElemKivetel(); }
         }
 
         public void Sorba(T ertek)
         {
-           if(n > E.Length)
+           if(n >= E.Length)
             {
                 throw new NincsHelyKivetel();
             }
             else
             {
-                E[n] = ertek;
+                E[u] = ertek;
+                u = (u+1) % E.Length;
                 n++;
             }
         }
@@ -98,11 +99,10 @@ namespace OE.ALGA.Adatszerkezetek
         {
             if (!Ures)
             {
-                for(int i=1; i<n; i++)
-                {
-                    E[i-1] = E[i];
-                }
-                return E[--n];
+                T temp = E[e];
+                e = (e+1) % E.Length;
+                n--;
+                return temp;
             }
             else throw new NincsElemKivetel();
         }
@@ -110,19 +110,19 @@ namespace OE.ALGA.Adatszerkezetek
     public class TombLista<T> : Lista<T>, IEnumerable<T>
     {
         T[] E;
-        int n = 0;
+        int n;
         public int Elemszam
         {
             get { return n; }
         }
-        public TombLista(int meret)
+        public TombLista(int meret = 5)
         {
             E = new T[meret];
             n = 0;
         }
         public T Kiolvas(int index)
         {
-            if (index > E.Length || index < 0)
+            if (index >= E.Length || index < 0)
             {
                 throw new HibasIndexKivetel();
             }
@@ -131,7 +131,7 @@ namespace OE.ALGA.Adatszerkezetek
 
         public void Modosit(int index, T ertek)
         {
-            if(index > E.Length || index < 0)
+            if(index >= E.Length || index < 0)
             {
                 throw new HibasIndexKivetel();
             }
@@ -143,35 +143,23 @@ namespace OE.ALGA.Adatszerkezetek
 
         public void Hozzafuz(T ertek)
         {
-            if (n > E.Length)
-            {
-                T[] Temp = E;
-                E = new T[n * 2];
-                for(int i=0; i < n; i++)
-                {
-                    E[i] = Temp[i];
-                }
-            }
-            else
-            {
-                E[n] = ertek;
-                n++;
-            }
+            Beszur(n, ertek);
         }
 
         public void Beszur(int index, T ertek)
         {
-            if(index > E.Length || index < 0)
+            if(index > n || index < 0)
             {
                 throw new HibasIndexKivetel();
             }
             else if (n<E.Length)
             {
-                for(int i=n-1; i<=index; i--)
+                for(int i=n; i>index; i--)
                 {
                     E[i] = E[i - 1];
                 }
                 E[index] = ertek;
+                n++;
             }
             else
             {
@@ -182,32 +170,33 @@ namespace OE.ALGA.Adatszerkezetek
                     E[i] = Temp[i];
                 }
                 E[index] = ertek;
+                n++;
             }
         }
 
         public void Torol(T ertek)
         {
-            if (n != 0)
+            int cnt = 0;
+            for(int i=0; i<n; i++)
             {
-                int i = 0;
-                while (i < n)
+                if (E[i].Equals(ertek))
                 {
-                    if (E[i].Equals(ertek))
-                    {
-                        for(int j=i; j<n-1; j++)
-                        {
-                            E[j] = E[j+1];
-                        }
-                    }
-                    n--;
+                    cnt++;
+                }
+                else
+                {
+                    E[i - cnt] = E[i];
                 }
             }
-            else { throw new NincsElemKivetel(); }
+            n -= cnt;
         }
 
         public void Bejar(Action<T> muvelet)
         {
-            throw new NotImplementedException();
+            for(int i=0; i<n; i++)
+            {
+                muvelet(E[i]);
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -218,7 +207,7 @@ namespace OE.ALGA.Adatszerkezetek
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
         }
     }
     public class TombListaBejaro<T> : IEnumerator<T>
@@ -236,21 +225,17 @@ namespace OE.ALGA.Adatszerkezetek
             this.n = n;
         }
 
-        object IEnumerator.Current => throw new NotImplementedException();
+        object IEnumerator.Current => this.Current;
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
 
         public bool MoveNext()
         {
-            if (aktualisIndex < n)
-            {
-                aktualisIndex++;
-                return true;
-            }
-            return false;
+            aktualisIndex++;
+            return aktualisIndex < n;
         }
 
         public void Reset()
