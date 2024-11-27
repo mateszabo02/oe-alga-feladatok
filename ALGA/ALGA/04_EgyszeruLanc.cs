@@ -157,58 +157,106 @@ namespace OE.ALGA.Adatszerkezetek
 
         public void Hozzafuz(T ertek)
         {
-            Beszur(elemszam, ertek);
+            LancElem<T> uj = new LancElem<T> (ertek, null);
+            if(fej == null)
+            {
+                fej = uj;
+            }
+            else
+            {
+                LancElem<T> temp = fej;
+                while(temp.kov != null)
+                {
+                    temp = temp.kov;
+                }
+                temp.kov = uj;
+            }
+            elemszam++;
         }
 
         public T Kiolvas(int index)
         {
-            if(index<0 || index >= elemszam)
+            LancElem<T>? temp = fej;
+            int i = 0;
+            while(temp != null && i < index)
+            {
+                temp = temp.kov;
+                i++;
+            }
+            if(temp != null)
+            {
+                return temp.tart;
+            }
+            else
             {
                 throw new HibasIndexKivetel() ;
             }
-            LancElem<T> temp = fej;
-            for(int i = 0; i < index; i++)
-            {
-                temp = temp.kov;
-            }
-            return temp.tart;
+            //if(index<0 || index >= elemszam)
+            //{
+            //    throw new HibasIndexKivetel() ;
+            //}
+            //LancElem<T> temp = fej;
+            //for(int i = 0; i < index; i++)
+            //{
+            //    temp = temp.kov;
+            //}
+            //return temp.tart;
         }
 
         public void Modosit(int index, T ertek)
         {
-            if(index<0 || index >= elemszam)
+            LancElem<T>? temp = fej;
+            int i = 0;
+            while( temp != null && i < index)
+            {
+                temp = temp.kov;
+                i++;
+            }
+            if (temp != null)
+            {
+                temp.tart = ertek;
+            }
+            else
             {
                 throw new HibasIndexKivetel();
             }
-            LancElem<T> temp = fej;
-            for(int i=0; i < index; i++)
-            {
-                temp = temp.kov;
-            }
-            temp.tart = ertek;
+            //if(index<0 || index >= elemszam)
+            //{
+            //    throw new HibasIndexKivetel();
+            //}
+            //LancElem<T> temp = fej;
+            //for(int i=0; i < index; i++)
+            //{
+            //    temp = temp.kov;
+            //}
+            //temp.tart = ertek;
         }
 
         public void Torol(T ertek)
         {
             LancElem<T>? temp = fej;
             LancElem<T>? e = null;
-            while (temp.kov != null)
+            do
             {
-                if (temp.tart.Equals(ertek))
+                while (temp != null && !temp.tart.Equals(ertek))
                 {
-                    if(temp == fej)
-                    {
-                        fej = fej.kov;
-                    }
-                    else
-                    {
-                        e.kov = temp.kov;
-                    }
-                    elemszam--;
+                    e = temp;
+                    temp = temp.kov;
                 }
-                e = temp;
-                temp = temp.kov;
-            }
+                    if(temp != null)
+                    {
+                        LancElem<T>? q = temp.kov;
+                        if(e == null)
+                        {
+                            fej = q;
+                        }
+                        else
+                        {
+                            e.kov = q;
+                        }
+                        temp = q;
+                    }
+            } while (temp != null);
         }
         public IEnumerator<T> GetEnumerator()
         {
