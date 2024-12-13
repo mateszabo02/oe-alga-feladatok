@@ -204,7 +204,7 @@ namespace OE.ALGA.Adatszerkezetek
             while (!S.Ures)
             {
                 E e = S.Sorbol();
-                if (vhalmaz.Kiolvas(e.Honnan) != vhalmaz.Kiolvas(e.Hova))
+                if (!vhalmaz.Kiolvas(e.Honnan).Equals(vhalmaz.Kiolvas(e.Hova)))
                 {
                     if (!A.Eleme(e)) A.Beszur(e);
 
