@@ -128,15 +128,15 @@ namespace OE.ALGA.Adatszerkezetek
     {
         public static Halmaz<V> SzelessegiBejaras<V, E>(Graf<V, E> g, V start, Action<V> muvelet) where V : IComparable
         {
-            TombSor<V> S = new TombSor<V>(g.CsucsokSzama);
+            Sor<V> S = new LancoltSor<V>();
             S.Sorba(start);
-            FaHalmaz<V> F = new FaHalmaz<V>();
+            Halmaz<V> F = new FaHalmaz<V>();
             F.Beszur(start);
             while (!S.Ures)
             {
                 V k = S.Sorbol();
                 muvelet(k);
-                g.Szomszedai(k).Bejar((V x) =>
+                g.Szomszedai(k).Bejar(x =>
                 {
                     if (!F.Eleme(x))
                     {

@@ -26,8 +26,7 @@ namespace OE.ALGA.Adatszerkezetek
             E = new SzotarElem<K, T>[meret];
             h = (x=>Math.Abs(hasitoFuggveny(x)) % E.Length);
         }
-        public HasitoSzotarTulcsordulasiTerulettel(int meret)
-    : this(meret, x => x.GetHashCode())
+        public HasitoSzotarTulcsordulasiTerulettel(int meret) : this(meret, x => x.GetHashCode())
         {
 
         }
@@ -91,10 +90,6 @@ namespace OE.ALGA.Adatszerkezetek
                 if(temp != null)
                 {
                     U.Torol(temp);
-                }
-                else
-                {
-                    throw new HibasKulcsKivetel();
                 }
             }
         }
